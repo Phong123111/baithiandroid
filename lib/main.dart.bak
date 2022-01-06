@@ -66,6 +66,7 @@ class _MyAppPageState extends State<MyApp> {
                   labelText: 'Search'
                 ),
                 onChanged: (value){
+                  filterContact(value.toLowerCase());
                 },
               ),
             ),
@@ -154,7 +155,7 @@ class _MyAppPageState extends State<MyApp> {
                                   )
                                 ),
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ContactDetail(contact: item)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ContactDetail()));
                                 },
                               ),
                             );
@@ -172,13 +173,44 @@ class _MyAppPageState extends State<MyApp> {
           ],
         ),
         floatingActionButton: new FloatingActionButton(onPressed: null,
-          child: new Icon(Icons.add),
+          child: new Icon(Icons.people),
           backgroundColor: Color(0xff007e33),
           foregroundColor: Colors.white,
         ),
       ),
     );
   }
+
+  void filterContact(String searchTerm) {
+    var tmpSearchList = [];
+
+
+    if (searchTerm.isNotEmpty) {
+
+      List<Map<String, dynamic>> tmpList = List<Map<String, dynamic>>();
+      tmpSearchList.forEach((element) {
+
+
+        if(element['name'].toLowerCase().contains(searchTerm.trim()))
+          {
+            tmpList.add(element);
+          }
+
+      });
+
+      setState(() {
+        items.clear();
+        items.addAll(tmpList);
+      });
+      return;
+    }
+    else{
+      setState(() {
+        items.clear();
+      });
+    }
+  }
+
 
 }
 

@@ -1,14 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'contact.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 
 class ContactDetail extends StatefulWidget {
-  _ContactDetailPageState createState() => new _ContactDetailPageState();
+  final Contact contact;
+  ContactDetail({Key key, this.contact}):super(key: key);
+  _ContactDetailPageState createState() => new _ContactDetailPageState(contact);
 }
 
 class _ContactDetailPageState extends State<ContactDetail> {
-
+  Contact contact;
+  _ContactDetailPageState(this.contact);
 
   @override
   void initState()
@@ -33,12 +38,7 @@ class _ContactDetailPageState extends State<ContactDetail> {
               Navigator.pop(context);
             },)
           ],
-          title: Text('Contact A - Details'
-          /**  ,style: GoogleFonts.lato(
-              textStyle: TextStyle(
-                  color: Colors.white,  fontSize: 20, fontWeight:FontWeight.w600
-              )
-          ),**/),
+          title: Text('Contact - Details'),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -68,17 +68,17 @@ class _ContactDetailPageState extends State<ContactDetail> {
                               children: [
                                 Row(
                                   children: [
-                                    Text("CodeLikeIce",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30))
+                                    Text(contact.ten,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30))
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    Text("justlikeice@mail.com",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15))
+                                    Text(contact.email,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15))
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    Text("+86789964612567",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15))
+                                    Text(contact.sdt,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15))
                                   ],
                                 )
                               ],
